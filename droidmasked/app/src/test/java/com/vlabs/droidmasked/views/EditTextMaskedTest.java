@@ -1,14 +1,13 @@
 package com.vlabs.droidmasked.views;
 
-import com.vlabs.droidmasked.test.MainActivity;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -16,8 +15,22 @@ import static org.junit.Assert.assertTrue;
  */
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = "src/main/AndroidManifest.xml", emulateSdk = 22)
+@Config(manifest = "src/main/AndroidManifest.xml", sdk = 22)
 public class EditTextMaskedTest {
 
+    private EditTextMasked editTextMasked;
 
+    @Before
+    public void setUp()
+    {
+        editTextMasked = new EditTextMasked(RuntimeEnvironment.application);
+    }
+
+
+    @Test
+    public void testUnmask() throws Exception {
+        String textWithoutMask = editTextMasked.unmask("T.E/.S*T");
+        assertTrue(textWithoutMask.equals("TEST"));
+
+    }
 }

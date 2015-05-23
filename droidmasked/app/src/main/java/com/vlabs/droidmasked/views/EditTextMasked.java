@@ -23,6 +23,10 @@ public class EditTextMasked extends EditText {
     boolean isUpdating = false;
     String old = "";
 
+    public EditTextMasked(Context context) {
+        super(context);
+    }
+
     public EditTextMasked(Context context, AttributeSet attrs)
     {
         super(context, attrs);
@@ -88,7 +92,7 @@ public class EditTextMasked extends EditText {
     }
 
     public String unmask(String s) {
-        return s.replaceAll("[^0-9]*", "");
+        return s.replaceAll("[^a-zA-Z0-9]+","");
     }
 
     private String selectMaskDefault() //TODO change name this method
