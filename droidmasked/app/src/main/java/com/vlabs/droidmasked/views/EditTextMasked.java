@@ -44,26 +44,8 @@ public class EditTextMasked extends EditText {
 
     @Override
     protected void onTextChanged(CharSequence cs, int start, int lengthBefore, int lengthAfter) {
-        Log.i("CYCLELYFE", "onTextChanged");
         String str = unmask(cs.toString());
-        //String str = TelefoneMaskUtil.unmask(s.toString());
-        //String mask = "";
-        //String defaultMask = getDefaultMask(str);
         String mask = getMaskDefault(str);
-//        switch (str.length()) {
-//            case 11:
-//                mask = mask11;
-//                break;
-//            case 10:
-//                mask = mask10;
-//                break;
-//            case 9:
-//                mask = mask9;
-//                break;
-//            default:
-//                mask = defaultMask;
-//                break;
-//        }
 
         String mascara = "";
         if (isUpdating) {
@@ -112,23 +94,9 @@ public class EditTextMasked extends EditText {
                 {
                     maskDefault = mMaskArray[i];
                 }
-//                if((maskDefault = mMaskArray[i]).length() < maskDefault.length())
-//                {
-//                    maskDefault = mMaskArray[i];
-//                }
             }
         }
         return maskDefault;
     }
 
-//    private void getSpecial(String mask)
-//    {
-//        String specialCharacters;
-//        Pattern p = Pattern.compile("[^\\w\\*]");
-//        Matcher m = p.matcher(mask);
-//        while (m.find()) {
-//            String code = m.group();
-//            specialCharacters = code;
-//        }
-//    }
 }
