@@ -32,20 +32,18 @@ public class EditTextMasked extends EditText {
         super(context, attrs);
         mTypedArray = context.obtainStyledAttributes(attrs, R.styleable.DroidMaskedView, 0, 0);
         retrieveMasks();
-        Log.i("CYCLELYFE", "Constructor");
     }
 
     private void retrieveMasks()
     {
         String maskRaw = mTypedArray.getString(R.styleable.DroidMaskedView_mask);
         mMaskArray = maskRaw.split("\\|");
-        //selectMaskDefault();
     }
 
     @Override
     protected void onTextChanged(CharSequence cs, int start, int lengthBefore, int lengthAfter) {
         String str = unmask(cs.toString());
-        String mask = getMaskDefault(str);
+        String mask = selectMask(str);
 
         String mascara = "";
         if (isUpdating) {
@@ -81,19 +79,23 @@ public class EditTextMasked extends EditText {
         return s.replaceAll("[^#*]+","");
     }
 
-    private String getMaskDefault(String str) //TODO change name this method
+    private String selectMask(String str)
     {
         String maskDefault = "";
         if(mMaskArray != null)
         {
             Arrays.sort(mMaskArray, new ComparatorUtil());
+            maskDefault = mMaskArray[0];
+            int j = 1;
+
             for(int i = 0; i < mMaskArray.length; i++)
             {
-                maskDefault = mMaskArray[0];
-                if(str.length() > mMaskArray[i].length())
+                int size = (removeMask(mMaskArray[i]).length());
+                if(str.length() > size && j < mMaskArray.length)
                 {
-                    maskDefault = mMaskArray[i];
+                    maskDefault = mMaskArray[j];
                 }
+                j++;
             }
         }
         return maskDefault;
