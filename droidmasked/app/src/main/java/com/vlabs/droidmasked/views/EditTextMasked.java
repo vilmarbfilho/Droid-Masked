@@ -95,6 +95,10 @@ public class EditTextMasked extends EditText {
         return s.replaceAll("[^a-zA-Z0-9]+","");
     }
 
+    private String removeMask(String s){
+        return s.replaceAll("[^#*]+","");
+    }
+
     private String getMaskDefault(String str) //TODO change name this method
     {
         String maskDefault = "";
