@@ -49,7 +49,7 @@ public class EditTextMasked extends EditText {
         //String str = TelefoneMaskUtil.unmask(s.toString());
         //String mask = "";
         //String defaultMask = getDefaultMask(str);
-        String mask = selectMaskDefault();
+        String mask = getMaskDefault(str);
 //        switch (str.length()) {
 //            case 11:
 //                mask = mask11;
@@ -95,19 +95,23 @@ public class EditTextMasked extends EditText {
         return s.replaceAll("[^a-zA-Z0-9]+","");
     }
 
-    private String selectMaskDefault() //TODO change name this method
+    private String getMaskDefault(String str) //TODO change name this method
     {
         String maskDefault = "";
         if(mMaskArray != null)
         {
             Arrays.sort(mMaskArray, new ComparatorUtil());
-
             for(int i = 0; i < mMaskArray.length; i++)
             {
-                if((maskDefault = mMaskArray[i]).length() < maskDefault.length())
+                maskDefault = mMaskArray[0];
+                if(str.length() > mMaskArray[i].length())
                 {
                     maskDefault = mMaskArray[i];
                 }
+//                if((maskDefault = mMaskArray[i]).length() < maskDefault.length())
+//                {
+//                    maskDefault = mMaskArray[i];
+//                }
             }
         }
         return maskDefault;
