@@ -3,7 +3,6 @@ package com.vlabs.droidmasked.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.EditText;
 
 import com.vlabs.droidmasked.R;
