@@ -17,6 +17,11 @@ import java.util.Arrays;
  */
 public class EditTextMasked extends EditText {
 
+    private final String ALPHANUMERIC = "*";
+    private final String ALPHABET = "&";
+    private final String NUMERIC = "#";
+
+
     private TypedArray mTypedArray;
     private String[] mMaskArray;
 
@@ -43,31 +48,31 @@ public class EditTextMasked extends EditText {
     @Override
     protected void onTextChanged(CharSequence cs, int start, int lengthBefore, int lengthAfter) {
         String str = unmask(cs.toString());
-        String mask = selectMask(str);
+        String maskCurrent = selectMask(str);
 
-        String mascara = "";
+        String mask = "";
         if (isUpdating) {
             old = str;
             isUpdating = false;
             return;
         }
         int i = 0;
-        for (char m : mask.toCharArray()) {
+        for (char m : maskCurrent.toCharArray()) {
             if ((m != '#' && str.length() > old.length()) || (m != '#' && str.length() < old.length() && str.length() != i)) {
-                mascara += m;
+                mask += m;
                 continue;
             }
 
             try {
-                mascara += str.charAt(i);
+                mask += str.charAt(i);
             } catch (Exception e) {
                 break;
             }
             i++;
         }
         isUpdating = true;
-        setText(mascara);
-        setSelection(mascara.length());
+        setText(mask);
+        setSelection(mask.length());
     }
 
     public String unmask(String s) {
