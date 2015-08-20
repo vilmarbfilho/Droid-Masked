@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import com.vlabs.droidmasked.R;
 import com.vlabs.droidmasked.comparator.ComparatorUtil;
+import com.vlabs.droidmasked.util.Util;
 
 import java.util.Arrays;
 
@@ -67,7 +68,6 @@ public class EditTextMasked extends EditText {
         isUpdating = true;
         setText(mascara);
         setSelection(mascara.length());
-
     }
 
     public String unmask(String s) {
@@ -98,6 +98,14 @@ public class EditTextMasked extends EditText {
             }
         }
         return maskDefault;
+    }
+
+    public void addMask(String newMask){
+        mMaskArray = Util.mergeArrayString(newMask, mMaskArray);
+    }
+
+    public void addMask(String[] arr){
+        mMaskArray = Util.concatArrayString(arr, mMaskArray);
     }
 
 }
