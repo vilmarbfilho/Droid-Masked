@@ -3,6 +3,34 @@ Droid-Masked
 
 <img src="https://raw.githubusercontent.com/vilmarbfilho/Droid-Masked/master/droidMasked.png" alt="DroidMasked" />
 
+Usage
+-----
+Droid-Masked provides two ways of define a mask, programmatically or by layout XML.
+
+
+```java
+// Define a mask programmatically
+mEditTextMasked.addMask("###.###.###-##");
+
+// Define a array of masks
+String[] masks = {"###-###", "###.###-##", "##-##"};
+mEditTextMasked.addMask(masks);
+
+```
+
+Layout XML:
+
+```xml
+<com.vlabs.droidmasked.views.EditTextMasked
+        android:id="@+id/et_mask"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_square"
+        android:padding="5dp"
+        custom:mask="(##) ####-####|(##) #####-####|(##)###" />
+```
+
 License
 --------
 
