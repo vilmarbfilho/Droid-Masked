@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import com.vlabs.droidmasked.R;
 import com.vlabs.droidmasked.comparator.ComparatorUtil;
+import com.vlabs.droidmasked.exception.MaskException;
 import com.vlabs.droidmasked.util.Util;
 
 import java.util.Arrays;
@@ -43,6 +44,22 @@ public class EditTextMasked extends EditText {
     {
         String maskRaw = mTypedArray.getString(R.styleable.DroidMaskedView_mask);
         mMaskArray = maskRaw.split("\\|");
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        checkForMaskSameSize();
+    }
+
+    private void checkForMaskSameSize(){ //TODO improve it
+        for(int i = 0; i < mMaskArray.length; i++){
+            for(int j = i + 1; j < mMaskArray.length; j++){
+                if(mMaskArray[i].length() == mMaskArray[j].length()){
+                    throw new MaskException("There mask with the same size. Currently this library does not offer this support. Size Duplicate: [" + mMaskArray[i] + " and " + mMaskArray[j] + "]");
+                }
+            }
+        }
     }
 
     @Override
