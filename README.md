@@ -1,4 +1,4 @@
-Droid-Masked [Building]
+Droid-Masked [WIP]
 =======
 
 <img src="https://raw.githubusercontent.com/vilmarbfilho/Droid-Masked/master/droidMasked.png" alt="DroidMasked" />
